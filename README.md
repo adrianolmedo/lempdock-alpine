@@ -101,6 +101,8 @@ $ docker-compose up -d --build
 
 Go to http://172.17.0.1:8080.
 
+![Connected successfully to MySQL](https://i.imgur.com/crTX0m9.png)
+
 ---
 
 ## Enable Xdebug
@@ -134,21 +136,21 @@ In `.devcontainer/` rename `devcontainer.example.json` to `devcontainer.json`.
 Put your settings and extensions favorites, example:
 
 ```json
-	"settings": {
-		"terminal.integrated.sendKeybindingsToShell": true,
-		"terminal.integrated.tabs.enabled": true,
-		"php.validate.executablePath": "/usr/local/bin/php"
-	},
+"settings": {
+	"terminal.integrated.sendKeybindingsToShell": true,
+	"terminal.integrated.tabs.enabled": true,
+	"php.validate.executablePath": "/usr/local/bin/php"
+},
 
-	"extensions": [
-		"bmewburn.vscode-intelephense-client",
-		"ecmel.vscode-html-css",
-		"felixfbecker.php-debug",
-		"felixfbecker.php-intellisense",
-		"formulahendry.terminal",
-		"kakumei.php-xdebug",
-		"lonefy.vscode-JS-CSS-HTML-formatter"
-	]
+"extensions": [
+	"bmewburn.vscode-intelephense-client",
+	"ecmel.vscode-html-css",
+	"felixfbecker.php-debug",
+	"felixfbecker.php-intellisense",
+	"formulahendry.terminal",
+	"kakumei.php-xdebug",
+	"lonefy.vscode-JS-CSS-HTML-formatter"
+]
 ```
 
 #### Step 2 - Up services
