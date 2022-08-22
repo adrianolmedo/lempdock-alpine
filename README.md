@@ -1,6 +1,6 @@
 # LEMPDock Alpine
 
-My simple LEMP server dockerized with Alpine Linux, a full dev environment for PHP that include some utilities like Xdebug, Composer and Vim.
+Simple LEMP server dockerized with Alpine Linux, a full dev environment for PHP that include some utilities like Xdebug, Composer and Vim.
 
 ## Contents
 
