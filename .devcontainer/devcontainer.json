@@ -1,0 +1,13 @@
+{
+	"name": "LEMPDock",
+	"dockerComposeFile": "../docker-compose.yml",
+	"service": "php-fpm",
+	"workspaceFolder": "/var/www/html",
+	"settings": {},
+	"extensions": [],
+	"portsAttributes": {
+		"9000": {
+			"label": "9000"
+		}
+	}
+}

@@ -39,15 +39,15 @@ RUN pecl install xdebug \
 	&& curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
 # Config for Xdebug
-COPY ./php-fpm/docker-php-ext-xdebug.ini /usr/local/etc/php/conf.d/
+COPY ./php-fpm/usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini /usr/local/etc/php/conf.d/
 
 # Setting vim configuration for root user
-COPY ./.docker/root/. /root
+COPY ./php-fpm/root/. /root
 
 # Switch to non-root user
 USER ${USERNAME}
 
 # Setting vim configuration for non-root user
-COPY ./.docker/home/non-root/. /home/${USERNAME}
+COPY ./php-fpm/home/non-root/. /home/${USERNAME}
 
 CMD ["php-fpm", "-y", "/usr/local/etc/php-fpm.conf", "-R"]

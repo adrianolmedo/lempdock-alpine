@@ -9,10 +9,10 @@ RUN addgroup -g ${USER_GID} -S ${USERNAME} \
 #	&& adduser ${USERNAME} www-data \
     && apk add --update vim
 
-COPY ./nginx/default.conf /etc/nginx/conf.d/
+COPY ./nginx/etc/nginx/conf.d/default.conf /etc/nginx/conf.d/
 
 # Setting vim configuration for root user
-COPY ./.docker/root/. /root
+COPY ./nginx/root/. /root
 
 ## Add permissions for non-root user
 RUN touch /var/run/nginx.pid \
@@ -25,4 +25,4 @@ RUN touch /var/run/nginx.pid \
 USER ${USERNAME}
 
 # Setting vim configuration for non-root user
-COPY ./.docker/home/non-root/. /home/${USERNAME}
+COPY ./nginx/home/non-root/. /home/${USERNAME}

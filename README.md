@@ -83,7 +83,6 @@ $dbpass = '1234567a';
 
 try {
     $conn = new PDO("mysql:host=$dbhost;dbname=$dbname", $dbroot, $dbpass);
-    
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     echo 'Connected successfully';
 } catch(PDOException $e) {
