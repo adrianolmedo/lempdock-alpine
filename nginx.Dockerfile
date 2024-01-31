@@ -1,4 +1,4 @@
-FROM nginx:stable-alpine
+FROM nginx:stable-alpine3.17
 
 # Add non-root user
 ARG USERNAME
@@ -8,8 +8,6 @@ RUN addgroup -g ${USER_GID} -S ${USERNAME} \
 	&& adduser -D -u ${USER_UID} -S ${USERNAME} -s /bin/sh ${USERNAME} \
 #	&& adduser ${USERNAME} www-data \
     && apk add --update vim
-
-COPY ./nginx/etc/nginx/conf.d/default.conf /etc/nginx/conf.d/
 
 # Setting vim configuration for root user
 COPY ./nginx/root/. /root
@@ -23,6 +21,8 @@ RUN touch /var/run/nginx.pid \
 
 # Switch to non-root user
 USER ${USERNAME}
+
+COPY ./nginx/etc/nginx/conf.d/default.conf /etc/nginx/conf.d/
 
 # Setting vim configuration for non-root user
 COPY ./nginx/home/non-root/. /home/${USERNAME}
