@@ -16,12 +16,14 @@ RUN addgroup -g ${USER_GID} -S ${USERNAME} \
 # Install packages and dependencies for PHP extensions
 RUN apk add --update \
     $PHPIZE_DEPS \
-    libpng-dev freetype-dev libjpeg-turbo-dev \
+    libpng-dev freetype-dev libjpeg-turbo-dev libxml2-dev libzip-dev libpq-dev \
     libzip-dev \
     libxml2-dev \
     zip \
     openssl \
-    vim
+    vim \
+    php81-pecl-imagick --repository=https://dl-cdn.alpinelinux.org/alpine/edge/community \
+    && apk --update add imagemagick imagemagick-dev
 
 # Install and config PHP extensions
 RUN pecl install xdebug \
@@ -35,8 +37,14 @@ RUN pecl install xdebug \
         pdo \
         pdo_mysql \
         zip \
-    && docker-php-ext-enable xdebug opcache \
-	&& curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+    && pecl install imagick \
+    && docker-php-ext-enable xdebug imagick zip opcache \
+	&& curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer \
+    && chown -R ${USERNAME}:${USERNAME} /usr/local/bin/composer
+    # It's important can to run composer as non-root user
+
+# Config for PHP
+COPY ./.docker/php-fpm/usr/local/etc/php/php.ini /usr/local/etc/php/.
 
 # Config for Xdebug
 COPY ./php-fpm/usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini /usr/local/etc/php/conf.d/
@@ -46,6 +54,8 @@ COPY ./php-fpm/root/. /root
 
 # Switch to non-root user
 USER ${USERNAME}
+
+WORKDIR /var/www/html
 
 # Setting vim configuration for non-root user
 COPY ./php-fpm/home/non-root/. /home/${USERNAME}
