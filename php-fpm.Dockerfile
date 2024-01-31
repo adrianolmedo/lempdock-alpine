@@ -14,7 +14,7 @@ RUN addgroup -g ${USER_GID} -S ${USERNAME} \
 	&& sed -i "s/group = www-data/group = ${USERNAME}/g" /usr/local/etc/php-fpm.d/www.conf
 
 # Install packages and dependencies for PHP extensions
-RUN apk add --update \
+RUN apk add --update linux-headers \
     $PHPIZE_DEPS \
     libpng-dev freetype-dev libjpeg-turbo-dev libxml2-dev libzip-dev libpq-dev \
     libzip-dev \
@@ -36,6 +36,7 @@ RUN pecl install xdebug \
         mysqli \
         pdo \
         pdo_mysql \
+        pdo_pgsql \
         zip \
     && pecl install imagick \
     && docker-php-ext-enable xdebug imagick zip opcache \
@@ -44,7 +45,7 @@ RUN pecl install xdebug \
     # It's important can to run composer as non-root user
 
 # Config for PHP
-COPY ./.docker/php-fpm/usr/local/etc/php/php.ini /usr/local/etc/php/.
+COPY ./php-fpm/usr/local/etc/php/php.ini /usr/local/etc/php/.
 
 # Config for Xdebug
 COPY ./php-fpm/usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini /usr/local/etc/php/conf.d/
