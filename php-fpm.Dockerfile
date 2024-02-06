@@ -45,13 +45,13 @@ RUN pecl install xdebug \
     # It's important can to run composer as non-root user
 
 # Config for PHP
-COPY ./php-fpm/usr/local/etc/php/php.ini /usr/local/etc/php/.
+COPY ./php-fpm/php.ini /usr/local/etc/php/.
 
 # Config for Xdebug
-COPY ./php-fpm/usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini /usr/local/etc/php/conf.d/
+COPY ./php-fpm/docker-php-ext-xdebug.ini /usr/local/etc/php/conf.d/
 
 # Setting vim configuration for root user
-COPY ./php-fpm/root/. /root
+COPY ./php-fpm/.vimrc /root
 
 # Switch to non-root user
 USER ${USERNAME}
@@ -59,6 +59,6 @@ USER ${USERNAME}
 WORKDIR /var/www/html
 
 # Setting vim configuration for non-root user
-COPY ./php-fpm/home/non-root/. /home/${USERNAME}
+COPY ./php-fpm/.vimrc /home/${USERNAME}
 
 CMD ["php-fpm", "-y", "/usr/local/etc/php-fpm.conf", "-R"]

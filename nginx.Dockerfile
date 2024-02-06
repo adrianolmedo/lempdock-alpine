@@ -10,7 +10,7 @@ RUN addgroup -g ${USER_GID} -S ${USERNAME} \
     && apk add --update vim
 
 # Setting vim configuration for root user
-COPY ./nginx/root/. /root
+COPY ./nginx/.vimrc /root
 
 ## Add permissions for non-root user
 RUN touch /var/run/nginx.pid \
@@ -22,7 +22,7 @@ RUN touch /var/run/nginx.pid \
 # Switch to non-root user
 USER ${USERNAME}
 
-COPY ./nginx/etc/nginx/conf.d/default.conf /etc/nginx/conf.d/
+COPY ./nginx/default.conf /etc/nginx/conf.d/
 
 # Setting vim configuration for non-root user
-COPY ./nginx/home/non-root/. /home/${USERNAME}
+COPY ./nginx/.vimrc /home/${USERNAME}
