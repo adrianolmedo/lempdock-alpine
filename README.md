@@ -46,8 +46,8 @@ APACHE_HOST_HTTP_PORT=8080
 PHP_VERSION=8
 
 MYSQL_VERSION=8
-MYSQL_DATABASE=hello_world
-MYSQL_USER=johndoe
+MYSQL_DATABASE=lempdock
+MYSQL_USER=admin
 MYSQL_PASSWORD=1234567b
 MYSQL_PORT=3307
 MYSQL_ROOT_PASSWORD=1234567a
@@ -77,7 +77,7 @@ $ vim hello-world/index.php
 ```php
 <?php
 $dbhost = 'mysql';
-$dbname = 'hello_world';
+$dbname = 'lempdock';
 $dbroot = 'root';
 $dbpass = '1234567a';
 
